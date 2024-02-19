@@ -12,7 +12,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    image: shintsujin/kittygram_backend
+    image: shintsujin/kittygram_backend:latest
     env_file: .env
     volumes:
       - static:/backend_static
@@ -21,12 +21,12 @@ services:
       - db
   frontend:
     env_file: .env
-    image: shintsujin/kittygram_frontend
+    image: shintsujin/kittygram_frontend:latest
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
   gateway:
-    image: shintsujin/kittygram_gateway
+    image: shintsujin/kittygram_gateway:latest
     env_file: .env
     ports:
       - 9000:80
@@ -35,5 +35,5 @@ services:
       - media:/media/
     depends_on:
       - db
-
-
+      - backend
+      - frontend
